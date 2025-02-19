@@ -1,5 +1,5 @@
 import React from 'react'
-import Sec4Card from "@/Components/ui/Sec4Card"
+import Sec4Card from './ui/Sec4Card';
 const Section4 = () => {
 
   return (
