@@ -1,5 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
+import {
+    ClerkProvider,
+    SignInButton,
+    SignUpButton,
+    SignedIn,
+    SignedOut,
+    UserButton,
+  } from '@clerk/nextjs'
 
 const Navbar = () => {
   return (
@@ -12,7 +20,21 @@ const Navbar = () => {
             <Link   className='text-gray-700 hover:scale-[1.02] transition-all hover:text-[#FF6F38] '  href={"/"} >Home</Link>
             <Link   className='text-gray-700 hover:scale-[1.02] transition-all hover:text-[#FF6F38] '  href={"/planatrip"} >Plan a Trip</Link>
             <Link   className='text-gray-700 hover:scale-[1.02] transition-all hover:text-[#FF6F38] '  href={"/contact"} >Contact Us</Link>
-            <Link   className='text-white hover:scale-[1.02] transition-all bg-[#FF6F38] px-[1rem] py-[0.5rem] rounded-[0.7rem] hover:bg-[#ff7038ee]  '  href={"/signin"} >Sign In</Link>
+            <SignedOut>
+                <Link   className='text-white hover:scale-[1.02] transition-all bg-[#FF6F38] px-[1rem] py-[0.5rem] rounded-[0.7rem] hover:bg-[#ff7038ee]  '  href={"/sign-up"} >Sign In</Link>
+            </SignedOut>
+            <SignedIn >
+                <UserButton appearance={
+                    {
+                        variables:{
+                            fontSize:'1.2rem'
+                        },
+                        elements:{
+                            avatarBox:"w-[3rem] h-[3rem]"
+                        }
+                    }
+                } />
+            </SignedIn>
         </div>
     </nav>
    </>
