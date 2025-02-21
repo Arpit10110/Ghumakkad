@@ -1,9 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
 import {
-    ClerkProvider,
-    SignInButton,
-    SignUpButton,
     SignedIn,
     SignedOut,
     UserButton,
