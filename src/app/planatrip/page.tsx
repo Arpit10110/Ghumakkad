@@ -2,6 +2,9 @@
 import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import AutoInput from '@/components/AutoInput';
+import { ToastContainer, toast } from 'react-toastify';
+import axios from "axios"
+import { AxiosResponse } from "axios";
 const Page = () => {
   const [FromInuput,SetFromInput] = useState("")
   const [ToInuput,SetToInput] = useState("")
@@ -21,18 +24,42 @@ const Page = () => {
     console.log(value);
   }
 
+  const generateplan = async(data:any)=>{
+    try {
+      const res:AxiosResponse<any> = await axios.post("/api/generatedplan",{
+        data:data
+      })
+      console.log(res);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const setthedata = (e:any)=>{
     e.preventDefault();
-    const data = {
-      frominuput:FromInuput,
-      toinuput:ToInuput,
-      selecteddate:SelectedDate,
-      tripduration:TripDuration,
-      numberguest:NumberGuest,
-      tripbudget:Tripbudget,
-      triptype:Triptype
-    }
-    console.log(data)
+    if(FromInuput == "" || ToInuput == ""){
+      toast.error('Please Fill The form ', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    }else{
+      const data = {
+        frominuput:FromInuput,
+        toinuput:ToInuput,
+        selecteddate:SelectedDate,
+        tripduration:TripDuration,
+        numberguest:NumberGuest,
+        tripbudget:Tripbudget,
+        triptype:Triptype
+      }
+      generateplan(data)
+  }
   }
   return (
     <>
@@ -53,15 +80,15 @@ const Page = () => {
             </div>
             <div className="!text-[1.2rem] flex gap-[2rem] " >
                <h1>Trip Duration</h1>
-               <input type="number" onChange={(e)=>SetTripDuration(e.target.value)} className="text-black rounded-md  px-[0.5rem] w-[12%] " required/>
+               <input type="number" min={1} onChange={(e)=>SetTripDuration(e.target.value)} className="text-black rounded-md  px-[0.5rem] w-[12%] " required/>
             </div>
             <div className="!text-[1.2rem] flex gap-[1.5rem] " >
                <h1>How Many People Are Traveling?</h1>
-               <input type="number" onChange={(e)=>SetNumberGuest(e.target.value)} className="text-black rounded-md  px-[0.5rem] w-[12%] " required/>
+               <input type="number" min={1} onChange={(e)=>SetNumberGuest(e.target.value)} className="text-black rounded-md  px-[0.5rem] w-[12%] " required/>
             </div>
             <div className="!text-[1.2rem] flex gap-[1.5rem] " >
                <h1>How Much Do You Plan to Spend ₹ ?</h1>
-               <input type="number" onChange={(e)=>SetTripbudget(e.target.value)} className="text-black rounded-md  px-[0.5rem] w-[12%] " required/>
+               <input type="number" min={1} onChange={(e)=>SetTripbudget(e.target.value)} className="text-black rounded-md  px-[0.5rem] w-[12%] " required/>
             </div>
             <div className="!text-[1.2rem] flex flex-col gap-[1rem] " >
                <h1>Select Trip Type -</h1>
@@ -80,6 +107,18 @@ const Page = () => {
             <button className="w-fit px-[4rem] m-auto mb-[1rem] mt-[3rem] bg-gray-900  rounded-[1rem] hover:scale-[1.01] transition-all  text-[1.5rem]  py-[1rem] "  >Generate Trip🪄</button>
         </form>
       </div>
+      <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick={false}
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
     </>
   );
 };
