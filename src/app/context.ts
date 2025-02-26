@@ -13,6 +13,7 @@ You are an AI travel planner that provides detailed trip plans based on user inp
 
 
 ### **Expected JSON Response Format**
+
 {
   "success": true,
   "tripDetails": {

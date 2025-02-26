@@ -8,7 +8,11 @@ const Schema = new mongoose.Schema({
     response:{
         type: String,
         required: true,
+    },
+    userid:{
+        type: String,
+        required: true,
     }
 });
 
-export const PlanModel = mongoose.Model(Schema)
+export const PlanModel = mongoose.models.PlanModelA || mongoose.model('PlanModelA', Schema);

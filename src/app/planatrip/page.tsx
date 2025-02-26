@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios"
 import { AxiosResponse } from "axios";
 const Page = () => {
+
   const [FromInuput,SetFromInput] = useState("")
   const [ToInuput,SetToInput] = useState("")
   const [SelectedDate,SetSelectedDate] = useState("")
@@ -14,22 +15,37 @@ const Page = () => {
   const [Tripbudget,SetTripbudget] = useState("")
   const [Triptype,SetTriptype] = useState("Wanderer")
 
+  
+
   const SetingFromvalue = (value:string)=>{
     SetFromInput(value);
-    console.log(value);
   }
 
   const SetingTovalue = (value:string)=>{
     SetToInput(value);
-    console.log(value);
   }
 
-  const generateplan = async(data:any)=>{
+  const generateplan = async(data:any,userid:string)=>{
     try {
       const res:AxiosResponse<any> = await axios.post("/api/generatedplan",{
-        data:data
+        data:data,
+        userid:userid
       })
-      console.log(res);
+      const resdata = res.data
+      console.log(JSON.parse(resdata.data))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
+
+  const checkuser = async(data:any)=>{
+    try {
+      const res:AxiosResponse<any> = await axios.get("/api/user")
+      const resdata = res.data
+      const userid = resdata.data.id
+      console.log(userid)
+      generateplan(data,userid)
     } catch (error) {
       console.log(error)
     }
@@ -58,9 +74,11 @@ const Page = () => {
         tripbudget:Tripbudget,
         triptype:Triptype
       }
-      generateplan(data)
+      checkuser(data);
   }
   }
+
+  
   return (
     <>
     <Navbar />
