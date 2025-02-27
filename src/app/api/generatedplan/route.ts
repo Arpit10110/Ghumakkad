@@ -30,7 +30,7 @@ export const POST = async(req:any)=>{
         const result = await model.generateContent(prompt);
         const aires = await result.response.text()
 
-        PlanModel.create({
+       const dbplan=await PlanModel.create({
             userid:userid,
             query: `Trip plan from ${data.frominuput} to ${data.toinuput} with a budget of ₹${data.tripbudget} for ${data.numberguest} persons.`,
             response:aires
@@ -39,6 +39,7 @@ export const POST = async(req:any)=>{
         return NextResponse.json({
             success: true,
             data: aires,
+            dbplan:dbplan
         })
     } catch (error) {
         return NextResponse.json({

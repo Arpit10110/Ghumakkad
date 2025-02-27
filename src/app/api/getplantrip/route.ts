@@ -14,7 +14,6 @@ export const POST = async(req:any)=>{
         const data= await PlanModel.findById(id);
 
 
-
         return NextResponse.json({
             success:true,
             data:data

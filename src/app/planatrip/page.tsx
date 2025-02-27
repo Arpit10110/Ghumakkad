@@ -5,8 +5,12 @@ import AutoInput from '@/components/AutoInput';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios"
 import { AxiosResponse } from "axios";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import { useRouter } from "next/navigation";
 const Page = () => {
-
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
   const [FromInuput,SetFromInput] = useState("")
   const [ToInuput,SetToInput] = useState("")
   const [SelectedDate,SetSelectedDate] = useState("")
@@ -31,8 +35,9 @@ const Page = () => {
         data:data,
         userid:userid
       })
+      setOpen(false)
       const resdata = res.data
-      console.log(JSON.parse(resdata.data))
+      router.push(`/planid/${resdata.dbplan._id}`)
     } catch (error) {
       console.log(error)
     }
@@ -41,11 +46,25 @@ const Page = () => {
 
   const checkuser = async(data:any)=>{
     try {
+      setOpen(true)
       const res:AxiosResponse<any> = await axios.get("/api/user")
       const resdata = res.data
-      const userid = resdata.data.id
-      console.log(userid)
-      generateplan(data,userid)
+      if(resdata.succes == false ){
+        setOpen(false)
+        toast.warn(resdata.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
+      }else{
+        const userid = resdata.data.id
+        generateplan(data,userid)
+      }
     } catch (error) {
       console.log(error)
     }
@@ -81,9 +100,15 @@ const Page = () => {
   
   return (
     <>
+     <Backdrop
+        sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
+        open={open}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     <Navbar />
       <div className="pt-[10rem] justify-center items-center flex ">
-        <form onSubmit={setthedata} className="w-[80%]  p-[1rem] rounded-[1rem] bg-gray-700 flex flex-col gap-[1.5rem] text-white " >
+        <form onSubmit={setthedata} className="w-[80%] below-tab:w-[90%] below-lgmob:w-[95%] below-mmob:w-[98%]   p-[1rem] rounded-[1rem] bg-gray-700 flex flex-col gap-[1.5rem] text-white " >
             <div className="!text-[1.2rem]" >
                <h1>From📍</h1>
                <AutoInput Setfromavalue={SetingFromvalue} />
@@ -110,15 +135,15 @@ const Page = () => {
             </div>
             <div className="!text-[1.2rem] flex flex-col gap-[1rem] " >
                <h1>Select Trip Type -</h1>
-               <div className="w-full flex gap-[3rem] " >
-                  <div onClick={()=>SetTriptype("Wanderer")} className={`w-[15%] flex justify-center item-center rounded-[1rem] cursor-pointer hover:scale-[1.02] transition-all  p-[3rem]  ${Triptype=="Wanderer"? "bg-[#468D93]":"bg-gray-800" }  `} >
-                      <h1  >Wanderer 🌍 </h1>
+               <div className="w-full flex gap-[3rem] below-lgmob:gap-[2rem] flex-wrap below-lgmob:justify-center  " >
+                  <div onClick={()=>SetTriptype("Wanderer")} className={`w-[15%] below-tab:w-[25%] below-lgmob:w-[30%] below-mmob:w-[95%]  items-center flex justify-center item-center rounded-[1rem] cursor-pointer hover:scale-[1.02] transition-all  p-[3rem]  ${Triptype=="Wanderer"? "bg-[#468D93]":"bg-gray-800" }  `} >
+                      <h1  className="text-center"  >Wanderer 🌍 </h1>
                   </div>
-                  <div  onClick={()=>SetTriptype("Adventurer")} className={`w-[15%] flex justify-center item-center rounded-[1rem] cursor-pointer hover:scale-[1.02] transition-all  p-[3rem]  ${Triptype=="Adventurer"? "bg-[#468D93]":"bg-gray-800" }  `}  >
-                      <h1 >Adventurer ⛰️ </h1>
+                  <div  onClick={()=>SetTriptype("Adventurer")} className={`w-[15%] below-tab:w-[25%] below-lgmob:w-[30%] below-mmob:w-[95%]  items-center flex justify-center item-center rounded-[1rem] cursor-pointer hover:scale-[1.02] transition-all  p-[3rem]  ${Triptype=="Adventurer"? "bg-[#468D93]":"bg-gray-800" }  `}  >
+                      <h1 className="text-center"  >Adventurer ⛰️ </h1>
                   </div>
-                  <div  onClick={()=>SetTriptype("Professional")} className={`w-[15%] flex justify-center item-center rounded-[1rem] cursor-pointer hover:scale-[1.02] transition-all  p-[3rem]  ${Triptype=="Professional"? "bg-[#468D93]":"bg-gray-800" }  `}  >
-                      <h1 >Professional 💼</h1>
+                  <div  onClick={()=>SetTriptype("Professional")} className={`w-[15%] below-tab:w-[25%] below-lgmob:w-[30%] below-mmob:w-[95%]  items-center flex justify-center item-center rounded-[1rem] cursor-pointer hover:scale-[1.02] transition-all  p-[3rem]  ${Triptype=="Professional"? "bg-[#468D93]":"bg-gray-800" }  `}  >
+                      <h1 className="text-center"  >Professional 💼</h1>
                   </div>
                </div>
             </div>
