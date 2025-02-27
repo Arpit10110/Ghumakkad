@@ -21,7 +21,7 @@ const Navbar = () => {
                 <Link   className='text-white hover:scale-[1.02] transition-all bg-[#FF6F38] px-[1rem] py-[0.5rem] rounded-[0.7rem] hover:bg-[#ff7038ee]  '  href={"/sign-up"} >Sign In</Link>
             </SignedOut>
             <SignedIn >
-                <UserButton appearance={
+                {/* <UserButton appearance={
                     {
                         variables:{
                             fontSize:'1.2rem'
@@ -30,7 +30,8 @@ const Navbar = () => {
                             avatarBox:"w-[3rem] h-[3rem]"
                         }
                     }
-                } />
+                } /> */}
+                <Link href={"/user-profile"} >Profile</Link>
             </SignedIn>
         </div>
     </nav>
