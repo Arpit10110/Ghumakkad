@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   },
 };
 
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkProvider,ClerkLoaded,ClerkLoading } from "@clerk/nextjs";
 
 export default function RootLayout({
   children,
@@ -67,7 +67,17 @@ export default function RootLayout({
 
           <title>Ghumkkad - Explore & Plan Your Trips</title>
         </head>
-        <body>{children}</body>
+        <body>
+        <ClerkLoading>
+            <div className="w-full justify-center items-center flex bg-gray-900 h-[100vh] flex-col " >
+                <h1 className=" text-[4rem] text-[#FF6F38]  ">Welcome to Ghumakkad</h1>
+                <h5 className=" text-[1.5rem] text-[#FF6F38]  ">Great things take time! Loading your experience...</h5>
+            </div>
+        </ClerkLoading>
+        <ClerkLoaded>
+          {children}
+        </ClerkLoaded>
+          </body>
       </html>
     </ClerkProvider>
   );
