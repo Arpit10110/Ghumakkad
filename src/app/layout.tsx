@@ -63,6 +63,8 @@ export default function RootLayout({
           <meta name="twitter:description" content="Plan your trips seamlessly with Ghumkkad. Get the best travel recommendations and budget insights." />
           <meta name="twitter:image" content="/favicon.png" />
 
+          <meta name="google-site-verification" content="XT0nYe__4mxz7yNohm0n6d6EcqKd1q5j8Ly0FGWKchA" />
+
           <title>Ghumkkad - Explore & Plan Your Trips</title>
         </head>
         <body>{children}</body>
