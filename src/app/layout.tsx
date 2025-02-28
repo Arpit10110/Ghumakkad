@@ -2,31 +2,32 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Ghumkkad - Explore & Plan Your Trips",
-  description: "Discover and plan your perfect trip with Ghumkkad. Get personalized travel itineraries, budget estimates, and recommendations.",
-  keywords: "travel, trip planning, budget travel, itineraries, explore destinations",
+  title: "Ghumakkad - AI-Powered Travel Planning & Smart Itineraries",
+  description: "Plan your dream trip with Ghumakkad! Get AI-powered travel recommendations, custom itineraries, real-time budget estimates, and seamless trip planning.",
+  keywords: "AI trip planner, travel planning, budget travel, travel itineraries, explore destinations, smart travel, Gemini 1.5 AI, personalized travel, vacation planner, trip budget estimator",
   openGraph: {
-    title: "Ghumkkad - Your Ultimate Travel Planner",
-    description: "Plan your trips seamlessly with Ghumkkad. Get the best travel recommendations and budget insights.",
-    url: "https://ghumakad.vercel.app", // Replace with your actual domain
-    siteName: "Ghumkkad",
+    title: "Ghumakkad - AI-Powered Travel Planning & Itineraries",
+    description: "Plan your trips with AI! Get personalized recommendations, smart travel itineraries, and real-time budget insights with Ghumakkad.",
+    url: "https://ghumakkad.vercel.app",
+    siteName: "Ghumakkad",
     images: [
       {
-        url: "/favicon.png", // Update if you have a specific OG image
+        url: "/ghumakkad-og.png", // Replace with a high-quality OG image
         width: 1200,
         height: 630,
-        alt: "Ghumkkad - Travel Planning Platform",
+        alt: "Ghumakkad - AI-Powered Travel Planning",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ghumkkad - Your Ultimate Travel Planner",
-    description: "Plan your trips seamlessly with Ghumkkad. Get the best travel recommendations and budget insights.",
-    images: ["/favicon.png"], // Twitter preview image
+    title: "Ghumakkad - AI-Powered Travel Planning & Itineraries",
+    description: "Plan your trips with AI! Get personalized recommendations, smart travel itineraries, and real-time budget insights with Ghumakkad.",
+    images: ["/ghumakkad-og.png"], // Ensure this image exists
   },
 };
+
 
 import { ClerkProvider,ClerkLoaded,ClerkLoading } from "@clerk/nextjs";
 
@@ -39,6 +40,8 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <head>
+        <link rel="canonical" href="https://ghumakkad.vercel.app" />
+        <meta name="publisher" content="Ghumakkad Team" />
           {/* Favicon */}
           <link rel="icon" href="/favicon.png" sizes="any" />
           <link rel="apple-touch-icon" href="/favicon.png" />
