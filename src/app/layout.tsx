@@ -68,7 +68,7 @@ export default function RootLayout({
 
           <meta name="google-site-verification" content="XT0nYe__4mxz7yNohm0n6d6EcqKd1q5j8Ly0FGWKchA" />
 
-          <title>Ghumkkad - Explore & Plan Your Trips</title>
+          <title>Ghumkkad -  AI-Powered Travel Planning & Smart Itineraries</title>
         </head>
         <body>
         <ClerkLoading>
