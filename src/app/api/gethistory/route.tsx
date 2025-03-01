@@ -15,12 +15,24 @@ export const POST = async(req:any)=>{
         return NextResponse.json({
             success:true,
             data:data
+        },{
+            headers: {
+                'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
+                'Pragma': 'no-cache',
+                'Expires': '0',
+            }
         })
         
     } catch (error) {
         return NextResponse.json({
             success:false,
             error:error
+        },{
+            headers: {
+                'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
+                'Pragma': 'no-cache',
+                'Expires': '0',
+            }
         })
     }
 }

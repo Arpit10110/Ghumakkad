@@ -35,9 +35,9 @@ const Page = () => {
         data:data,
         userid:userid
       })
-      setOpen(false)
       const resdata = res.data
       router.push(`/planid/${resdata.dbplan._id}`)
+      setOpen(false)
     } catch (error) {
       console.log(error)
     }

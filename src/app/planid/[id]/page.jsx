@@ -10,6 +10,7 @@ const page = ({params}) => {
   const [open, setOpen] = useState(true);
   const [PlanDataQuery,SetPlanDataQuery] = useState();
   const [PlanDataRes,SetPlanDataRes] = useState();
+  const [Succes,SetSucces] = useState(false);
   const getplan = async(id)=>{
     try {
       const {data} = await axios.post("/api/getplantrip",{
@@ -22,7 +23,9 @@ const page = ({params}) => {
         SetPlanDataRes(resobj.tripDetails);
         console.log(resobj);
       }else{
-
+        const res=data.data;
+        const resobj = JSON.parse(res.response)
+        console.log(resobj);
       }
       setOpen(false);
     } catch (error) {
