@@ -40,6 +40,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <head>
+        <meta name="google-site-verification" content="G2swBI0MBGznGNU4S18HR_g2urdYQdP1KsL0fGd7-sM" />
         <link rel="canonical" href="https://ghumakkad.vercel.app" />
         <meta name="publisher" content="Ghumakkad Team" />
           {/* Favicon */}
